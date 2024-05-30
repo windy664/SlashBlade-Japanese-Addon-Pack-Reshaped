@@ -26,7 +26,7 @@ public class SlashBladeAddonRecipeProvider extends RecipeProvider implements ICo
 
     protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, SBItems.slashblade_wood).pattern("  L").pattern(" L ").pattern("B  ").define('B', Items.WOODEN_SWORD).define('L', ItemTags.LOGS).unlockedBy(getHasName(Items.WOODEN_SWORD), has(Items.WOODEN_SWORD)).save(consumer);
-        SmithingTransformRecipeBuilder.smithing(Ingredient.of(TofuItems.TOFU_UPGRADE_SMITHING_TEMPLATE.get()), Ingredient.of(getItem(SBATofuCraftItems.TOFUMETAL_SLASHBLADE)), Ingredient.of(TofuBlocks.DIAMONDTOFU.get()), RecipeCategory.COMBAT, getItem(SBATofuCraftItems.TOFUDIAMOND_SLASHBLADE)).save(consumer, SlashBladeAddon.prefix("tofu_diamond_blade"));
+        SmithingTransformRecipeBuilder.smithing(Ingredient.of(TofuItems.TOFU_UPGRADE_SMITHING_TEMPLATE.get()), Ingredient.of(getItem(SBATofuCraftItems.TOFUMETAL_SLASHBLADE)), Ingredient.of(TofuBlocks.DIAMONDTOFU.get()), RecipeCategory.COMBAT, getItem(SBATofuCraftItems.TOFUDIAMOND_SLASHBLADE)).unlocks("has_item", has(getItem(SBATofuCraftItems.TOFUMETAL_SLASHBLADE))).save(consumer, SlashBladeAddon.prefix("tofu_diamond_blade"));
         SlashBladeShapedRecipeBuilder.shaped(SBATofuCraftItems.TOFUMETAL_SLASHBLADE)
                 .pattern(" ST")
                 .pattern("ST ")

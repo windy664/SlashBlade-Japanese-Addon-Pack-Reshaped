@@ -33,11 +33,11 @@ public class SBATofuCraftItems {
         event.register(ForgeRegistries.Keys.ITEMS, helper -> {
 
             helper.register(new ResourceLocation(SlashBladeAddon.MODID, "slashblade_tofu_ishi"),
-                    new TofuSlashBladeItem(TofuItemTier.SOLID, 3, -2.4F, 300, new Item.Properties()).setTexture(SlashBladeAddon.prefix("model/tofuishi_katana.png")));
+                    new TofuSlashBladeItem(TofuItemTier.SOLID, 3, -2.4F, 200, new Item.Properties()).setTexture(SlashBladeAddon.prefix("model/tofuishi_katana.png")));
             helper.register(new ResourceLocation(SlashBladeAddon.MODID, "slashblade_tofu_metal"),
-                    new TofuSlashBladeItem(TofuItemTier.METAL, 5, -2.4F, 600, new Item.Properties()).setTexture(SlashBladeAddon.prefix("model/tofumetal_katana.png")));
+                    new TofuSlashBladeItem(TofuItemTier.METAL, 5, -2.4F, 500, new Item.Properties()).setTexture(SlashBladeAddon.prefix("model/tofumetal_katana.png")));
             helper.register(new ResourceLocation(SlashBladeAddon.MODID, "slashblade_tofu_diamond"),
-                    new TofuSlashBladeItem(TofuItemTier.TOFUDIAMOND, 8, -2.4F, 1800, new Item.Properties()).setTexture(SlashBladeAddon.prefix("model/tofudiamond_katana.png")));
+                    new TofuSlashBladeItem(TofuItemTier.TOFUDIAMOND, 9, -2.4F, 1200, new Item.Properties()).setTexture(SlashBladeAddon.prefix("model/tofudiamond_katana.png")));
 
         });
     }
