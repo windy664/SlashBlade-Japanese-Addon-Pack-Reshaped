@@ -2,8 +2,8 @@ package cn.mmf.slashblade_addon.data;
 
 import baguchan.tofucraft.registry.TofuBlocks;
 import baguchan.tofucraft.registry.TofuItems;
+import cn.mmf.slashblade_addon.SlashBladeAddon;
 import cn.mmf.slashblade_addon.compat.SBATofuCraftItems;
-import mods.flammpfeil.slashblade.data.tag.SlashBladeItemTags;
 import mods.flammpfeil.slashblade.init.SBItems;
 import mods.flammpfeil.slashblade.recipe.SlashBladeShapedRecipeBuilder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -14,7 +14,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.SmithingTransformRecipe;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 
@@ -27,7 +26,7 @@ public class SlashBladeAddonRecipeProvider extends RecipeProvider implements ICo
 
     protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, SBItems.slashblade_wood).pattern("  L").pattern(" L ").pattern("B  ").define('B', Items.WOODEN_SWORD).define('L', ItemTags.LOGS).unlockedBy(getHasName(Items.WOODEN_SWORD), has(Items.WOODEN_SWORD)).save(consumer);
-        SmithingTransformRecipeBuilder.smithing(Ingredient.of(TofuItems.TOFU_UPGRADE_SMITHING_TEMPLATE.get()), Ingredient.of(getItem(SBATofuCraftItems.TOFUMETAL_SLASHBLADE)), Ingredient.of(TofuBlocks.DIAMONDTOFU.get()), RecipeCategory.COMBAT, getItem(SBATofuCraftItems.TOFUDIAMOND_SLASHBLADE));
+        SmithingTransformRecipeBuilder.smithing(Ingredient.of(TofuItems.TOFU_UPGRADE_SMITHING_TEMPLATE.get()), Ingredient.of(getItem(SBATofuCraftItems.TOFUMETAL_SLASHBLADE)), Ingredient.of(TofuBlocks.DIAMONDTOFU.get()), RecipeCategory.COMBAT, getItem(SBATofuCraftItems.TOFUDIAMOND_SLASHBLADE)).save(consumer, SlashBladeAddon.prefix("tofu_diamond_blade"));
         SlashBladeShapedRecipeBuilder.shaped(SBATofuCraftItems.TOFUMETAL_SLASHBLADE)
                 .pattern(" ST")
                 .pattern("ST ")

@@ -4,17 +4,22 @@ import baguchan.tofucraft.api.tfenergy.IEnergyContained;
 import baguchan.tofucraft.api.tfenergy.IEnergyExtractable;
 import baguchan.tofucraft.api.tfenergy.IEnergyInsertable;
 import mods.flammpfeil.slashblade.capability.slashblade.ISlashBladeState;
-import mods.flammpfeil.slashblade.item.ItemSlashBladeDetune;
+import mods.flammpfeil.slashblade.capability.slashblade.SimpleBladeStateCapabilityProvider;
+import mods.flammpfeil.slashblade.init.DefaultResources;
+import mods.flammpfeil.slashblade.item.ItemSlashBlade;
 import mods.flammpfeil.slashblade.item.SwordType;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -23,11 +28,17 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class TofuSlashBladeItem extends ItemSlashBladeDetune implements IEnergyContained, IEnergyExtractable, IEnergyInsertable {
+public class TofuSlashBladeItem extends ItemSlashBlade implements IEnergyContained, IEnergyExtractable, IEnergyInsertable {
+    private ResourceLocation model;
+    private ResourceLocation texture;
+    private final float baseAttack;
     public final int tfMax;
     public TofuSlashBladeItem(Tier tier, int attackDamageIn, float attackSpeedIn, int tfMax, Properties builder) {
         super(tier, attackDamageIn, attackSpeedIn, builder);
         this.tfMax = tfMax;
+        this.baseAttack = (float) attackDamageIn;
+        this.model = DefaultResources.resourceDefaultModel;
+        this.texture = DefaultResources.resourceDefaultTexture;
     }
 
     @Override
@@ -120,5 +131,32 @@ public class TofuSlashBladeItem extends ItemSlashBladeDetune implements IEnergyC
             tooltip.add(Component.translatable("slashblade.sword_type.noname").withStyle(ChatFormatting.DARK_GRAY));
         }
 
+    }
+
+    public ResourceLocation getModel() {
+        return this.model;
+    }
+
+    public TofuSlashBladeItem setModel(ResourceLocation model) {
+        this.model = model;
+        return this;
+    }
+
+    public ResourceLocation getTexture() {
+        return this.texture;
+    }
+
+    public TofuSlashBladeItem setTexture(ResourceLocation texture) {
+        this.texture = texture;
+        return this;
+    }
+
+
+    public boolean isDestructable(ItemStack stack) {
+        return false;
+    }
+
+    public @Nullable ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
+        return new SimpleBladeStateCapabilityProvider(this.model, this.texture, this.baseAttack, this.getTier().getUses());
     }
 }
