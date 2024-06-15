@@ -132,6 +132,11 @@ repositories {
         name = "ModMaven"
         url = "https://modmaven.dev"
     }
+
+    maven {
+        name "KosmX's maven"
+        url 'https://maven.kosmx.dev/'
+    }
 }
 
 dependencies {
@@ -143,12 +148,13 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
 
-    implementation fg.deobf("curse.maven:slashblade-resharped-1022428:5375320")
+    implementation fg.deobf("curse.maven:slashblade-resharped-1022428:5414529")
     implementation fg.deobf("curse.maven:tofucraftreload-317469:5350643")
     compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"))
     compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"))
     // at runtime, use the full JEI jar for Forge
     runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}"))
+    runtimeOnly(fg.deobf("dev.kosmx.player-anim:player-animation-lib-forge:1.0.2-rc1+1.20"))
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
