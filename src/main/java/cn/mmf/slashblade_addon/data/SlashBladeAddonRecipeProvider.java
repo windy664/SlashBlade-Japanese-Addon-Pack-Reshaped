@@ -6,6 +6,7 @@ import cn.mmf.slashblade_addon.SlashBladeAddon;
 import cn.mmf.slashblade_addon.compat.SBATofuCraftItems;
 import mods.flammpfeil.slashblade.data.builtin.SlashBladeBuiltInRegistry;
 import mods.flammpfeil.slashblade.init.SBItems;
+import mods.flammpfeil.slashblade.item.SwordType;
 import mods.flammpfeil.slashblade.recipe.RequestDefinition;
 import mods.flammpfeil.slashblade.recipe.SlashBladeIngredient;
 import mods.flammpfeil.slashblade.recipe.SlashBladeShapedRecipeBuilder;
@@ -47,6 +48,7 @@ public class SlashBladeAddonRecipeProvider extends RecipeProvider implements ICo
                 .define('R', Tags.Items.STRING)
                 .define('W', Tags.Items.RODS_WOODEN)
                 .unlockedBy(getHasName(SBItems.slashblade_wood), has(SBItems.slashblade_wood)).save(consumer);
+
         //nihil
         SlashBladeShapedRecipeBuilder.shaped(SlashBladeAddonBuiltInRegistry.NIHIL.location())
                 .pattern("SIS")
@@ -121,7 +123,26 @@ public class SlashBladeAddonRecipeProvider extends RecipeProvider implements ICo
                      .proudSoul(6500)
                      .refineCount(3)
                      .build()))
-        .unlockedBy(getHasName(SBItems.slashblade), has(SBItems.slashblade)).save(consumer);
+                .unlockedBy(getHasName(SBItems.slashblade), has(SBItems.slashblade)).save(consumer);
+
+        //WA
+        SlashBladeShapedRecipeBuilder.shaped(SlashBladeAddonBuiltInRegistry.KATANA.location())
+                .pattern("  P")
+                .pattern(" B ")
+                .pattern("S  ")
+                .define('P', SBItems.proudsoul_ingot)
+                .define('S', Items.IRON_SWORD)
+                .define('B', SlashBladeIngredient.of(SBItems.slashblade_silverbamboo, RequestDefinition.Builder.newInstance().addSwordType(SwordType.BROKEN).build()))
+                .unlockedBy(getHasName(SBItems.slashblade_silverbamboo), has(SBItems.slashblade_silverbamboo)).save(consumer);
+
+        SlashBladeShapedRecipeBuilder.shaped(SlashBladeAddonBuiltInRegistry.TACHI.location())
+                .pattern("  P")
+                .pattern(" B ")
+                .pattern("S  ")
+                .define('P', SBItems.proudsoul_sphere)
+                .define('S', Items.IRON_SWORD)
+                .define('B', SlashBladeIngredient.of(SBItems.slashblade_silverbamboo, RequestDefinition.Builder.newInstance().addSwordType(SwordType.BROKEN).build()))
+                .unlockedBy(getHasName(SBItems.slashblade_silverbamboo), has(SBItems.slashblade_silverbamboo)).save(consumer);
     }
 
     public Item getItem(ResourceLocation item) {

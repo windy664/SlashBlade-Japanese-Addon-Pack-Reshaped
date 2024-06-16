@@ -18,13 +18,19 @@ import java.util.List;
 
 public class SlashBladeAddonBuiltInRegistry {
 
+    //nihil
     public static final ResourceKey<SlashBladeDefinition> NIHIL = register("nihil");
     public static final ResourceKey<SlashBladeDefinition> NIHILEX = register("nihilex");
     public static final ResourceKey<SlashBladeDefinition> NIHILBX = register("nihilbx");
     public static final ResourceKey<SlashBladeDefinition> NIHILUL = register("nihilul");
     public static final ResourceKey<SlashBladeDefinition> CRIMSONCHERRY = register("crimsoncherry");
 
+    //WA
+    public static final ResourceKey<SlashBladeDefinition> KATANA = register("katana");
+    public static final ResourceKey<SlashBladeDefinition> TACHI = register("tachi");
+
     public static void registerAll(BootstapContext<SlashBladeDefinition> bootstrap) {
+        //nihil
         bootstrap.register(NIHIL,
            new SlashBladeDefinition(SlashBladeAddon.prefix("nihil"),
                 RenderDefinition.Builder.newInstance()
@@ -104,6 +110,27 @@ public class SlashBladeAddonBuiltInRegistry {
                         new EnchantmentDefinition(getEnchantmentID(Enchantments.SMITE), 5),
                         new EnchantmentDefinition(getEnchantmentID(Enchantments.BANE_OF_ARTHROPODS), 5),
                         new EnchantmentDefinition(getEnchantmentID(Enchantments.FIRE_ASPECT), 2))));
+
+        //WA
+        bootstrap.register(KATANA,
+           new SlashBladeDefinition(SlashBladeAddon.prefix("katana"),
+                RenderDefinition.Builder.newInstance()
+                .textureName(SlashBladeAddon.prefix("model/wa/katana.png"))
+                .modelName(SlashBladeAddon.prefix("model/wa/wa.obj")).build(),
+                PropertiesDefinition.Builder.newInstance()
+                .baseAttackModifier(3.0F)
+                .maxDamage(457)
+                .defaultSwordType(List.of(SwordType.NONE)).build(), List.of()));
+
+        bootstrap.register(TACHI,
+           new SlashBladeDefinition(SlashBladeAddon.prefix("tachi"),
+                RenderDefinition.Builder.newInstance()
+                .textureName(SlashBladeAddon.prefix("model/wa/tachi.png"))
+                .modelName(SlashBladeAddon.prefix("model/wa/wa.obj")).build(),
+                PropertiesDefinition.Builder.newInstance()
+                .baseAttackModifier(3.0F)
+                .maxDamage(457)
+                .defaultSwordType(List.of(SwordType.NONE)).build(), List.of()));
     }
 
     private static ResourceKey<SlashBladeDefinition> register(String id) {
