@@ -1,6 +1,7 @@
 package cn.mmf.slashblade_addon.data;
 
 import cn.mmf.slashblade_addon.SlashBladeAddon;
+import cn.mmf.slashblade_addon.registry.SBASlashArtsRegistry;
 import mods.flammpfeil.slashblade.item.SwordType;
 import mods.flammpfeil.slashblade.registry.SlashArtsRegistry;
 import mods.flammpfeil.slashblade.registry.slashblade.EnchantmentDefinition;
@@ -10,6 +11,7 @@ import mods.flammpfeil.slashblade.registry.slashblade.SlashBladeDefinition;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -28,6 +30,11 @@ public class SlashBladeAddonBuiltInRegistry {
     //WA
     public static final ResourceKey<SlashBladeDefinition> KATANA = register("katana");
     public static final ResourceKey<SlashBladeDefinition> TACHI = register("tachi");
+
+    //BladeMaster
+    public static final ResourceKey<SlashBladeDefinition> GREEN_MIST = register("green_mist");
+    public static final ResourceKey<SlashBladeDefinition> AQUABLAZE = register("aquablaze");
+    public static final ResourceKey<SlashBladeDefinition> MOONLIGHT_CHERRY = register("moonlight_cherry");
 
     public static void registerAll(BootstapContext<SlashBladeDefinition> bootstrap) {
         //nihil
@@ -131,6 +138,20 @@ public class SlashBladeAddonBuiltInRegistry {
                 .baseAttackModifier(3.0F)
                 .maxDamage(457)
                 .defaultSwordType(List.of(SwordType.NONE)).build(), List.of()));
+
+        //BladeMaster
+        bootstrap.register(GREEN_MIST,
+           new SlashBladeDefinition(SlashBladeAddon.prefix("green_mist"),
+                RenderDefinition.Builder.newInstance()
+                .textureName(SlashBladeAddon.prefix("model/blademaster/green_mist.png"))
+                .modelName(SlashBladeAddon.prefix("model/blademaster/blademaster.obj")).build(),
+                PropertiesDefinition.Builder.newInstance()
+                .baseAttackModifier(4.0F + Tiers.DIAMOND.getAttackDamageBonus())
+                .maxDamage(60)
+                .slashArtsType(SBASlashArtsRegistry.RAPIDBLISTERINGSWORDS.getId())
+                .defaultSwordType(List.of(SwordType.BEWITCHED)).build(),
+                List.of(new EnchantmentDefinition(getEnchantmentID(Enchantments.POWER_ARROWS), 3),
+                        new EnchantmentDefinition(getEnchantmentID(Enchantments.BLOCK_FORTUNE), 3))));
     }
 
     private static ResourceKey<SlashBladeDefinition> register(String id) {

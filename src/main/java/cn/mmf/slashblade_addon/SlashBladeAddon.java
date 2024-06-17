@@ -1,8 +1,13 @@
 package cn.mmf.slashblade_addon;
 
 import cn.mmf.slashblade_addon.compat.SBATofuCraftItems;
+import cn.mmf.slashblade_addon.registry.SBAComboStateRegistry;
+import cn.mmf.slashblade_addon.registry.SBASlashArtsRegistry;
+import cn.mmf.slashblade_addon.registry.SBAEntitiesRegistry;
 import com.mojang.logging.LogUtils;
+import mods.flammpfeil.slashblade.client.renderer.entity.SummonedSwordRenderer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -13,25 +18,23 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegisterEvent;
 import org.slf4j.Logger;
 
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod(SlashBladeAddon.MODID)
 public class SlashBladeAddon {
-    // Define mod id in a common place for everything to reference
     public static final String MODID = "slashblade_addon";
-    // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public SlashBladeAddon() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
-        // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
 
-        // Register the item to a creative tab
-        modEventBus.addListener(this::addCreative);
         modEventBus.addListener(this::register);
+        modEventBus.addListener(this::onRegisterRenderers);
+        modEventBus.addListener(this::addCreative);
+
+        SBASlashArtsRegistry.SLASH_ARTS.register(modEventBus);
+        SBAComboStateRegistry.COMBO_STATES.register(modEventBus);
     }
 
     public static ResourceLocation prefix(String path) {
@@ -46,9 +49,14 @@ public class SlashBladeAddon {
         if (ModList.get().isLoaded("tofucraft")) {
             SBATofuCraftItems.register(event);
         }
+        SBAEntitiesRegistry.register(event);
     }
 
-    // Add the example block item to the building blocks tab
+    public void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event)
+    {
+        event.registerEntityRenderer(SBAEntitiesRegistry.BlisteringSwords, SummonedSwordRenderer::new);
+    }
+
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (ModList.get().isLoaded("tofucraft")) {
             SBATofuCraftItems.addCreative(event);
