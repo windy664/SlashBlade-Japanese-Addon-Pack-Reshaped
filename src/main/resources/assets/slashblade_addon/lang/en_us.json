@@ -5,11 +5,21 @@
   "item.slashblade_addon.slashblade_tofu_metal.desc": "Metal Tofu's Heart.",
   "item.slashblade_addon.slashblade_tofu_diamond": "Tofu -Diamond-",
   "item.slashblade_addon.slashblade_tofu_diamond.desc": "Unbreakable Tofu.",
+
+  "slash_art.slashblade_addon.rapid_blistering_swords": "Rapid Blistering Swords",
+  "slash_art.slashblade_addon.spiral_edge": "Spiral Edge",
+  "slash_art.slashblade_addon.gale_swords": "Gale Storm PhantomSwords",
+
   "item.slashblade_addon.nihil": "Nihil",
   "item.slashblade_addon.nihilex": "Bloody Nihil",
   "item.slashblade_addon.nihilul": "Crimson Nihil",
   "item.slashblade_addon.crimsoncherry": "Crimson Cherry",
   "item.slashblade_addon.nihilbx": "Purgatorium Memento Mori",
+
   "item.slashblade_addon.katana": "Katana",
-  "item.slashblade_addon.tachi": "Tachi"
+  "item.slashblade_addon.tachi": "Tachi",
+
+  "item.slashblade_addon.green_mist": "Sacred-Green Mist-",
+  "item.slashblade_addon.aquablaze": "Crescent-Aqua Blaze-",
+  "item.slashblade_addon.moonlight_cherry": "MoonlightCherry-Storm Slash-"
 }

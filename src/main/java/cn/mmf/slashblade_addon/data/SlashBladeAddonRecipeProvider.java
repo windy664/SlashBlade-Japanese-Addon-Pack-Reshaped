@@ -10,6 +10,7 @@ import mods.flammpfeil.slashblade.item.SwordType;
 import mods.flammpfeil.slashblade.recipe.RequestDefinition;
 import mods.flammpfeil.slashblade.recipe.SlashBladeIngredient;
 import mods.flammpfeil.slashblade.recipe.SlashBladeShapedRecipeBuilder;
+import mods.flammpfeil.slashblade.registry.slashblade.EnchantmentDefinition;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
@@ -17,6 +18,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -143,9 +145,84 @@ public class SlashBladeAddonRecipeProvider extends RecipeProvider implements ICo
                 .define('S', Items.IRON_SWORD)
                 .define('B', SlashBladeIngredient.of(SBItems.slashblade_silverbamboo, RequestDefinition.Builder.newInstance().addSwordType(SwordType.BROKEN).build()))
                 .unlockedBy(getHasName(SBItems.slashblade_silverbamboo), has(SBItems.slashblade_silverbamboo)).save(consumer);
-    }
 
-    public Item getItem(ResourceLocation item) {
-        return ForgeRegistries.ITEMS.getValue(item);
-    }
+        //BladeMaster
+        SlashBladeShapedRecipeBuilder.shaped(SlashBladeAddonBuiltInRegistry.GREEN_MIST.location())
+            .pattern("PRE")
+            .pattern("RE ")
+            .pattern("BGC")
+            .define('P', SBItems.proudsoul_sphere)
+            .define('R', Items.REDSTONE_BLOCK)
+            .define('E', Items.EMERALD_BLOCK)
+            .define('G', Items.GOLD_BLOCK)
+            .define('C', Items.CHERRY_LEAVES)
+            .define('B', SlashBladeIngredient.of
+            (
+                RequestDefinition.Builder.newInstance()
+                .name(SlashBladeBuiltInRegistry.MURAMASA.location())
+                .killCount(1000)
+                .proudSoul(10000)
+                .refineCount(25)
+                .addEnchantment
+                (
+                    new EnchantmentDefinition(ForgeRegistries.ENCHANTMENTS.getKey(Enchantments.POWER_ARROWS), 3)
+                )
+                .build()
+            ))
+            .unlockedBy(getHasName(SBItems.slashblade), has(SBItems.slashblade)).save(consumer);
+
+        SlashBladeShapedRecipeBuilder.shaped(SlashBladeAddonBuiltInRegistry.AQUABLAZE.location())
+            .pattern("PRW")
+            .pattern("RL ")
+            .pattern("BGC")
+            .define('P', SBItems.proudsoul_sphere)
+            .define('R', Items.REDSTONE_BLOCK)
+            .define('W', Items.WATER_BUCKET)
+            .define('L', Items.LAVA_BUCKET)
+            .define('G', Items.GOLD_BLOCK)
+            .define('C', Items.CHERRY_LEAVES)
+            .define('B', SlashBladeIngredient.of
+            (
+                RequestDefinition.Builder.newInstance()
+                .name(SlashBladeBuiltInRegistry.MURAMASA.location())
+                .killCount(1000)
+                .proudSoul(10000)
+                .refineCount(25)
+                .addEnchantment
+                (
+                    new EnchantmentDefinition(ForgeRegistries.ENCHANTMENTS.getKey(Enchantments.FIRE_PROTECTION), 1)
+                )
+                .build()
+            ))
+            .unlockedBy(getHasName(SBItems.slashblade), has(SBItems.slashblade)).save(consumer);
+
+        SlashBladeShapedRecipeBuilder.shaped(SlashBladeAddonBuiltInRegistry.MOONLIGHT_CHERRY.location())
+            .pattern("PRQ")
+            .pattern("RL ")
+            .pattern("BGC")
+            .define('P', SBItems.proudsoul_sphere)
+            .define('R', Items.REDSTONE_BLOCK)
+            .define('Q', Items.QUARTZ_BLOCK)
+            .define('L', Items.GLOWSTONE)
+            .define('G', Items.GOLD_BLOCK)
+            .define('C', Items.CHERRY_LEAVES)
+            .define('B', SlashBladeIngredient.of
+            (
+                RequestDefinition.Builder.newInstance()
+                .name(SlashBladeBuiltInRegistry.MURAMASA.location())
+                .killCount(1000)
+                .proudSoul(10000)
+                .refineCount(25)
+                .addEnchantment
+                (
+                    new EnchantmentDefinition(ForgeRegistries.ENCHANTMENTS.getKey(Enchantments.THORNS), 1)
+                )
+              .build()
+            ))
+            .unlockedBy(getHasName(SBItems.slashblade), has(SBItems.slashblade)).save(consumer);
+        }
+
+        public Item getItem(ResourceLocation item) {
+            return ForgeRegistries.ITEMS.getValue(item);
+        }
 }

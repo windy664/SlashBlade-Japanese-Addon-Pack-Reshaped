@@ -1,8 +1,7 @@
 package cn.mmf.slashblade_addon.registry;
 
 import cn.mmf.slashblade_addon.SlashBladeAddon;
-import mods.flammpfeil.slashblade.registry.ComboStateRegistry;
-import mods.flammpfeil.slashblade.specialattack.SlashArts;
+import mods.flammpfeil.slashblade.slasharts.SlashArts;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
@@ -16,5 +15,7 @@ public class SBASlashArtsRegistry
 
     public static final Supplier<IForgeRegistry<SlashArts>> REGISTRY = SLASH_ARTS.makeRegistry(RegistryBuilder::new);
 
-    public static final RegistryObject<SlashArts> RAPIDBLISTERINGSWORDS = SLASH_ARTS.register("rapid_blistering_swords", () -> new SlashArts((e) -> SBAComboStateRegistry.RAPID_BLISTERING_SWORDS.getId()));
+    public static final RegistryObject<SlashArts> RAPID_BLISTERING_SWORDS = SLASH_ARTS.register("rapid_blistering_swords", () -> new SlashArts((e) -> SBAComboStateRegistry.RAPID_BLISTERING_SWORDS.getId()));
+    public static final RegistryObject<SlashArts> SPIRAL_EDGE = SLASH_ARTS.register("spiral_edge", () -> new SlashArts((e) -> SBAComboStateRegistry.SPIRAL_EDGE.getId()));
+    public static final RegistryObject<SlashArts> GALE_SWORDS = SLASH_ARTS.register("gale_swords", () -> new SlashArts((e) -> SBAComboStateRegistry.GALE_SWORDS.getId()));
 }

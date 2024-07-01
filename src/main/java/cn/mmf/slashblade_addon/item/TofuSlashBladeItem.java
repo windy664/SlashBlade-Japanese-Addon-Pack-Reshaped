@@ -157,6 +157,6 @@ public class TofuSlashBladeItem extends ItemSlashBlade implements IEnergyContain
     }
 
     public @Nullable ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
-        return new SimpleBladeStateCapabilityProvider(this.model, this.texture, this.baseAttack, this.getTier().getUses());
+        return new SimpleBladeStateCapabilityProvider(stack, this.model, this.texture, this.baseAttack, this.getTier().getUses());
     }
 }

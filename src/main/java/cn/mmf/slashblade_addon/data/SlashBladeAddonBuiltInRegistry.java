@@ -133,7 +133,7 @@ public class SlashBladeAddonBuiltInRegistry {
            new SlashBladeDefinition(SlashBladeAddon.prefix("tachi"),
                 RenderDefinition.Builder.newInstance()
                 .textureName(SlashBladeAddon.prefix("model/wa/tachi.png"))
-                .modelName(SlashBladeAddon.prefix("model/wa/wa.obj")).build(),
+                .modelName(SlashBladeAddon.prefix("model/wa/tachi.obj")).build(),
                 PropertiesDefinition.Builder.newInstance()
                 .baseAttackModifier(3.0F)
                 .maxDamage(457)
@@ -148,10 +148,54 @@ public class SlashBladeAddonBuiltInRegistry {
                 PropertiesDefinition.Builder.newInstance()
                 .baseAttackModifier(4.0F + Tiers.DIAMOND.getAttackDamageBonus())
                 .maxDamage(60)
-                .slashArtsType(SBASlashArtsRegistry.RAPIDBLISTERINGSWORDS.getId())
+                .slashArtsType(SBASlashArtsRegistry.RAPID_BLISTERING_SWORDS.getId())
                 .defaultSwordType(List.of(SwordType.BEWITCHED)).build(),
                 List.of(new EnchantmentDefinition(getEnchantmentID(Enchantments.POWER_ARROWS), 3),
                         new EnchantmentDefinition(getEnchantmentID(Enchantments.BLOCK_FORTUNE), 3))));
+
+        bootstrap.register
+        (
+            AQUABLAZE,
+            new SlashBladeDefinition
+            (
+                SlashBladeAddon.prefix("aquablaze"),
+                RenderDefinition.Builder.newInstance()
+                .textureName(SlashBladeAddon.prefix("model/blademaster/aquablaze.png"))
+                .modelName(SlashBladeAddon.prefix("model/blademaster/blademaster.obj")).build(),
+                PropertiesDefinition.Builder.newInstance()
+                .baseAttackModifier(4.0F + Tiers.DIAMOND.getAttackDamageBonus())
+                .maxDamage(60)
+                .slashArtsType(SBASlashArtsRegistry.SPIRAL_EDGE.getId())
+                .defaultSwordType(List.of(SwordType.BEWITCHED)).build(),
+                List.of
+                (
+                    new EnchantmentDefinition(getEnchantmentID(Enchantments.FIRE_ASPECT), 2),
+                    new EnchantmentDefinition(getEnchantmentID(Enchantments.FIRE_PROTECTION), 1)
+                )
+            )
+        );
+
+        bootstrap.register
+        (
+            MOONLIGHT_CHERRY,
+            new SlashBladeDefinition
+            (
+                SlashBladeAddon.prefix("moonlight_cherry"),
+                RenderDefinition.Builder.newInstance()
+                .textureName(SlashBladeAddon.prefix("model/blademaster/moonlightcherry.png"))
+                .modelName(SlashBladeAddon.prefix("model/blademaster/blademaster.obj")).build(),
+                PropertiesDefinition.Builder.newInstance()
+                .baseAttackModifier(4.0F + Tiers.DIAMOND.getAttackDamageBonus())
+                .maxDamage(60)
+                .slashArtsType(SBASlashArtsRegistry.GALE_SWORDS.getId())
+                .defaultSwordType(List.of(SwordType.BEWITCHED)).build(),
+                List.of
+                (
+                    new EnchantmentDefinition(getEnchantmentID(Enchantments.THORNS), 1),
+                    new EnchantmentDefinition(getEnchantmentID(Enchantments.SMITE), 5)
+                )
+            )
+        );
     }
 
     private static ResourceKey<SlashBladeDefinition> register(String id) {
