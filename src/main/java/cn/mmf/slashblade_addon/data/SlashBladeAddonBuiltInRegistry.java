@@ -20,7 +20,7 @@ import java.util.List;
 
 public class SlashBladeAddonBuiltInRegistry {
 
-    //nihil
+    //Nihil
     public static final ResourceKey<SlashBladeDefinition> NIHIL = register("nihil");
     public static final ResourceKey<SlashBladeDefinition> NIHILEX = register("nihilex");
     public static final ResourceKey<SlashBladeDefinition> NIHILBX = register("nihilbx");
@@ -36,6 +36,10 @@ public class SlashBladeAddonBuiltInRegistry {
     public static final ResourceKey<SlashBladeDefinition> GREEN_MIST = register("green_mist");
     public static final ResourceKey<SlashBladeDefinition> AQUABLAZE = register("aquablaze");
     public static final ResourceKey<SlashBladeDefinition> MOONLIGHT_CHERRY = register("moonlight_cherry");
+
+    //Dark Raven
+    public static final ResourceKey<SlashBladeDefinition> DARK_RAVEN = register("dark_raven");
+    public static final ResourceKey<SlashBladeDefinition> SNOW_CROW = register("snow_crow");
 
     public static void registerAll(BootstapContext<SlashBladeDefinition> bootstrap) {
         //nihil
@@ -205,6 +209,42 @@ public class SlashBladeAddonBuiltInRegistry {
                     new EnchantmentDefinition(getEnchantmentID(Enchantments.THORNS), 1),
                     new EnchantmentDefinition(getEnchantmentID(Enchantments.SMITE), 5)
                 )
+            )
+        );
+
+        //Dark Raven
+        bootstrap.register
+        (
+            DARK_RAVEN,
+            new SlashBladeDefinition
+            (
+                SlashBladeAddon.prefix("dark_raven"),
+                RenderDefinition.Builder.newInstance()
+                .textureName(SlashBladeAddon.prefix("model/darkraven/dark_raven.png"))
+                .modelName(SlashBladeAddon.prefix("model/darkraven/dark_raven.obj")).build(),
+                PropertiesDefinition.Builder.newInstance()
+                .baseAttackModifier(4.0F + Tiers.DIAMOND.getAttackDamageBonus())
+                .maxDamage(80)
+                .slashArtsType(SlashArtsRegistry.WAVE_EDGE.getId())
+                .defaultSwordType(List.of(SwordType.NONE)).build(),
+                List.of()
+            )
+        );
+
+        bootstrap.register
+        (
+            SNOW_CROW,
+            new SlashBladeDefinition
+            (
+                SlashBladeAddon.prefix("snow_crow"),
+                RenderDefinition.Builder.newInstance()
+                .textureName(SlashBladeAddon.prefix("model/darkraven/snow_crow.png"))
+                .modelName(SlashBladeAddon.prefix("model/darkraven/snow_crow.obj")).build(),
+                PropertiesDefinition.Builder.newInstance()
+                .baseAttackModifier(4.0F + Tiers.IRON.getAttackDamageBonus())
+                .maxDamage(60)
+                .defaultSwordType(List.of(SwordType.NONE)).build(),
+                List.of()
             )
         );
     }

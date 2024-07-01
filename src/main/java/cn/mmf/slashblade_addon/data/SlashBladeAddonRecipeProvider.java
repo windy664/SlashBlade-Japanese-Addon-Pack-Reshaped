@@ -231,6 +231,18 @@ public class SlashBladeAddonRecipeProvider extends RecipeProvider implements ICo
               .build()
             ))
             .unlockedBy(getHasName(SBItems.slashblade), has(SBItems.slashblade)).save(consumer);
+
+        //Dark Raven:Snow Crow
+
+        SlashBladeShapedRecipeBuilder.shaped(SlashBladeAddonBuiltInRegistry.SNOW_CROW.location())
+                .pattern(" FQ")
+                .pattern("SQ ")
+                .pattern("B  ")
+                .define('F', Items.FEATHER)
+                .define('S', Items.SNOWBALL)
+                .define('Q', Items.QUARTZ_BLOCK)
+                .define('B', SlashBladeIngredient.of(RequestDefinition.Builder.newInstance().name(SlashBladeBuiltInRegistry.DOUTANUKI.location()).build()))
+                .unlockedBy(getHasName(SBItems.slashblade), has(SBItems.slashblade)).save(consumer);
         }
 
         public Item getItem(ResourceLocation item) {
