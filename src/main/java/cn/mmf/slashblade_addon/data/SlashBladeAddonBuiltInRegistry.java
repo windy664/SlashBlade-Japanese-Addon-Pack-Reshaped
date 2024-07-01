@@ -44,6 +44,10 @@ public class SlashBladeAddonBuiltInRegistry {
     //Fluorescent Bar
     public static final ResourceKey<SlashBladeDefinition> FLUORESCENT_BAR = register("fluorescent_bar");
 
+    //Frost Wolf
+    public static final ResourceKey<SlashBladeDefinition> FROSTY_CHERRY = register("frosty_cherry");
+    public static final ResourceKey<SlashBladeDefinition> FROST_WOLF = register("frost_wolf");
+
     public static void registerAll(BootstapContext<SlashBladeDefinition> bootstrap) {
         //nihil
         bootstrap.register(NIHIL,
@@ -269,6 +273,43 @@ public class SlashBladeAddonBuiltInRegistry {
                 (
                     new EnchantmentDefinition(getEnchantmentID(Enchantments.UNBREAKING), 3)
                 )
+            )
+        );
+
+        //Frost Wolf
+        bootstrap.register
+        (
+            FROSTY_CHERRY,
+            new SlashBladeDefinition
+            (
+                SlashBladeAddon.prefix("frosty_cherry"),
+                RenderDefinition.Builder.newInstance()
+                .textureName(SlashBladeAddon.prefix("model/frostwolf/frosty_cherry.png"))
+                .modelName(SlashBladeAddon.prefix("model/frostwolf/frosty_cherry.obj")).build(),
+                PropertiesDefinition.Builder.newInstance()
+                .baseAttackModifier(4.0F + Tiers.DIAMOND.getAttackDamageBonus())
+                .maxDamage(150)
+                .slashArtsType(SBASlashArtsRegistry.RAPID_BLISTERING_SWORDS.getId())
+                .defaultSwordType(List.of(SwordType.BEWITCHED)).build(),
+                List.of()
+            )
+        );
+
+        bootstrap.register
+        (
+            FROST_WOLF,
+            new SlashBladeDefinition
+            (
+                SlashBladeAddon.prefix("frost_wolf"),
+                RenderDefinition.Builder.newInstance()
+                .textureName(SlashBladeAddon.prefix("model/frostwolf/frost_wolf.png"))
+                .modelName(SlashBladeAddon.prefix("model/frostwolf/frost_wolf.obj")).build(),
+                PropertiesDefinition.Builder.newInstance()
+                .baseAttackModifier(4.0F + Tiers.DIAMOND.getAttackDamageBonus())
+                .maxDamage(150)
+                .slashArtsType(SBASlashArtsRegistry.GALE_SWORDS.getId())
+                .defaultSwordType(List.of(SwordType.BEWITCHED)).build(),
+                List.of()
             )
         );
     }

@@ -252,6 +252,51 @@ public class SlashBladeAddonRecipeProvider extends RecipeProvider implements ICo
             .define('G', Items.GLASS)
             .define('S', SBItems.proudsoul)
             .unlockedBy(getHasName(SBItems.proudsoul), has(SBItems.proudsoul)).save(consumer);
+
+        //Frost Wolf
+        SlashBladeShapedRecipeBuilder.shaped(SlashBladeAddonBuiltInRegistry.FROSTY_CHERRY.location())
+            .pattern(" ID")
+            .pattern("SP ")
+            .pattern("BQ ")
+            .define('I', Items.ICE)
+            .define('D', Items.BLUE_DYE)
+            .define('S', Items.SNOW_BLOCK)
+            .define('P', SBItems.proudsoul_sphere)
+            .define('Q', Items.QUARTZ)
+            .define('B', SlashBladeIngredient.of
+            (
+                RequestDefinition.Builder.newInstance()
+                .name(SlashBladeBuiltInRegistry.DOUTANUKI.location())
+                .refineCount(10)
+                .addEnchantment
+                (
+                    new EnchantmentDefinition(ForgeRegistries.ENCHANTMENTS.getKey(Enchantments.FIRE_PROTECTION), 1)
+                )
+                .build()
+            ))
+            .unlockedBy(getHasName(SBItems.slashblade), has(SBItems.slashblade)).save(consumer);
+
+        SlashBladeShapedRecipeBuilder.shaped(SlashBladeAddonBuiltInRegistry.FROST_WOLF.location())
+            .pattern(" ID")
+            .pattern("SP ")
+            .pattern("BQ ")
+            .define('I', Items.ICE)
+            .define('D', Items.BLUE_DYE)
+            .define('S', Items.SNOW_BLOCK)
+            .define('P', SBItems.proudsoul_sphere)
+            .define('Q', Items.QUARTZ)
+            .define('B', SlashBladeIngredient.of
+            (
+                RequestDefinition.Builder.newInstance()
+                .name(SlashBladeBuiltInRegistry.MURAMASA.location())
+                .refineCount(25)
+                .addEnchantment
+                (
+                    new EnchantmentDefinition(ForgeRegistries.ENCHANTMENTS.getKey(Enchantments.FIRE_PROTECTION), 1)
+                )
+                .build()
+            ))
+            .unlockedBy(getHasName(SBItems.slashblade), has(SBItems.slashblade)).save(consumer);
         }
 
         public Item getItem(ResourceLocation item) {
