@@ -30,6 +30,7 @@ public class SlashBladeAddonBuiltInRegistry {
     //WA
     public static final ResourceKey<SlashBladeDefinition> KATANA = register("katana");
     public static final ResourceKey<SlashBladeDefinition> TACHI = register("tachi");
+    public static final ResourceKey<SlashBladeDefinition> BLUE = register("blue");
 
     //BladeMaster
     public static final ResourceKey<SlashBladeDefinition> GREEN_MIST = register("green_mist");
@@ -137,6 +138,16 @@ public class SlashBladeAddonBuiltInRegistry {
                 PropertiesDefinition.Builder.newInstance()
                 .baseAttackModifier(3.0F)
                 .maxDamage(457)
+                .defaultSwordType(List.of(SwordType.NONE)).build(), List.of()));
+
+        bootstrap.register(BLUE,
+           new SlashBladeDefinition(SlashBladeAddon.prefix("blue"),
+                RenderDefinition.Builder.newInstance()
+                .textureName(SlashBladeAddon.prefix("model/wa/blue.png"))
+                .modelName(SlashBladeAddon.prefix("model/wa/wa.obj")).build(),
+                PropertiesDefinition.Builder.newInstance()
+                .baseAttackModifier(7.0F)
+                .maxDamage(75)
                 .defaultSwordType(List.of(SwordType.NONE)).build(), List.of()));
 
         //BladeMaster

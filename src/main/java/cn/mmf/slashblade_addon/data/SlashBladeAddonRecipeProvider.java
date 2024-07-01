@@ -146,6 +146,17 @@ public class SlashBladeAddonRecipeProvider extends RecipeProvider implements ICo
                 .define('B', SlashBladeIngredient.of(SBItems.slashblade_silverbamboo, RequestDefinition.Builder.newInstance().addSwordType(SwordType.BROKEN).build()))
                 .unlockedBy(getHasName(SBItems.slashblade_silverbamboo), has(SBItems.slashblade_silverbamboo)).save(consumer);
 
+        SlashBladeShapedRecipeBuilder.shaped(SlashBladeAddonBuiltInRegistry.BLUE.location())
+                .pattern("BCI")
+                .pattern("CI ")
+                .pattern("SL ")
+                .define('B', Items.BLUE_DYE)
+                .define('C', Items.COAL_BLOCK)
+                .define('I', SBItems.proudsoul_ingot)
+                .define('S', Items.STICK)
+                .define('L', Items.STRING)
+                .unlockedBy(getHasName(SBItems.proudsoul_ingot), has(SBItems.proudsoul_ingot)).save(consumer);
+
         //BladeMaster
         SlashBladeShapedRecipeBuilder.shaped(SlashBladeAddonBuiltInRegistry.GREEN_MIST.location())
             .pattern("PRE")
