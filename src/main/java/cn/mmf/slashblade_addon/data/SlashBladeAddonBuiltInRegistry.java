@@ -41,6 +41,9 @@ public class SlashBladeAddonBuiltInRegistry {
     public static final ResourceKey<SlashBladeDefinition> DARK_RAVEN = register("dark_raven");
     public static final ResourceKey<SlashBladeDefinition> SNOW_CROW = register("snow_crow");
 
+    //Fluorescent Bar
+    public static final ResourceKey<SlashBladeDefinition> FLUORESCENT_BAR = register("fluorescent_bar");
+
     public static void registerAll(BootstapContext<SlashBladeDefinition> bootstrap) {
         //nihil
         bootstrap.register(NIHIL,
@@ -245,6 +248,27 @@ public class SlashBladeAddonBuiltInRegistry {
                 .maxDamage(60)
                 .defaultSwordType(List.of(SwordType.NONE)).build(),
                 List.of()
+            )
+        );
+
+        //Fluorescent Bar
+        bootstrap.register
+        (
+            FLUORESCENT_BAR,
+            new SlashBladeDefinition
+            (
+                SlashBladeAddon.prefix("fluorescent_bar"),
+                RenderDefinition.Builder.newInstance()
+                .textureName(SlashBladeAddon.prefix("model/fluorescentbar/fluorescent_bar.png"))
+                .modelName(SlashBladeAddon.prefix("model/fluorescentbar/fluorescent_bar.obj")).build(),
+                PropertiesDefinition.Builder.newInstance()
+                .baseAttackModifier(2.0F)
+                .maxDamage(Tiers.DIAMOND.getUses())
+                .defaultSwordType(List.of(SwordType.NONE)).build(),
+                List.of
+                (
+                    new EnchantmentDefinition(getEnchantmentID(Enchantments.UNBREAKING), 3)
+                )
             )
         );
     }
