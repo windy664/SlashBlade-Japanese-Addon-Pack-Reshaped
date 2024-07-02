@@ -21,7 +21,7 @@ import org.slf4j.Logger;
 @Mod(SlashBladeAddon.MODID)
 public class SlashBladeAddon {
     public static final String MODID = "slashblade_addon";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public SlashBladeAddon() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -55,6 +55,8 @@ public class SlashBladeAddon {
     public void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event)
     {
         event.registerEntityRenderer(SBAEntitiesRegistry.BlisteringSwords, SummonedSwordRenderer::new);
+        event.registerEntityRenderer(SBAEntitiesRegistry.SpiralEdgeSwords, SummonedSwordRenderer::new);
+        event.registerEntityRenderer(SBAEntitiesRegistry.GaleSwords, SummonedSwordRenderer::new);
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {

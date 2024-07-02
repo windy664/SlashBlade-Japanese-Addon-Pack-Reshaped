@@ -1,6 +1,6 @@
 package cn.mmf.slashblade_addon.entity;
 
-import mods.flammpfeil.slashblade.SlashBlade;
+import cn.mmf.slashblade_addon.registry.SBAEntitiesRegistry;
 import mods.flammpfeil.slashblade.ability.StunManager;
 import mods.flammpfeil.slashblade.entity.EntityAbstractSummonedSword;
 import mods.flammpfeil.slashblade.entity.IShootable;
@@ -18,14 +18,13 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.PlayMessages;
+import org.joml.Vector3f;
 
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -34,6 +33,8 @@ public class BlisteringSwordsEntity extends EntityAbstractSummonedSword
 {
     private static final EntityDataAccessor<Boolean> IT_FIRED = SynchedEntityData.defineId(BlisteringSwordsEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Float> SPEED = SynchedEntityData.defineId(BlisteringSwordsEntity.class, EntityDataSerializers.FLOAT);
+
+    private static final EntityDataAccessor<Vector3f> OFFSET = SynchedEntityData.defineId(BlisteringSwordsEntity.class, EntityDataSerializers.VECTOR3);
     long fireTime = -1;
 
     public BlisteringSwordsEntity(EntityType<? extends Projectile> entityTypeIn, Level worldIn)
@@ -45,7 +46,7 @@ public class BlisteringSwordsEntity extends EntityAbstractSummonedSword
 
     public static BlisteringSwordsEntity createInstance(PlayMessages.SpawnEntity packet, Level worldIn)
     {
-        return new BlisteringSwordsEntity(SlashBlade.RegistryEvents.BlisteringSwords, worldIn);
+        return new BlisteringSwordsEntity(SBAEntitiesRegistry.BlisteringSwords, worldIn);
     }
 
     @Override
@@ -55,6 +56,7 @@ public class BlisteringSwordsEntity extends EntityAbstractSummonedSword
 
         this.entityData.define(IT_FIRED, false);
         this.entityData.define(SPEED, 3.0f);
+        this.entityData.define(OFFSET, Vec3.ZERO.toVector3f());
     }
 
     public void doFire()
@@ -73,6 +75,13 @@ public class BlisteringSwordsEntity extends EntityAbstractSummonedSword
     }
 
     public float getSpeed() {return this.getEntityData().get(SPEED);}
+
+    public void setOffset(Vec3 offset)
+    {
+        this.getEntityData().set(OFFSET, offset.toVector3f());
+    }
+
+    public Vec3 getOffset() {return new Vec3(this.getEntityData().get(OFFSET));}
 
     @Override
     public void tick()
@@ -162,7 +171,7 @@ public class BlisteringSwordsEntity extends EntityAbstractSummonedSword
         // lifetime check
         if (!itFired() && getVehicle() instanceof LivingEntity)
         {
-            if (tickCount - getDelay() >= 40)
+            if (tickCount >= getDelay())
             {
                 fireTime = tickCount + getDelay();
                 doFire();
@@ -170,57 +179,16 @@ public class BlisteringSwordsEntity extends EntityAbstractSummonedSword
         }
     }
 
-    private void hitCheck()
+    protected void faceEntityStandby()
     {
-        Vec3 positionVec = this.position();
-        Vec3 dirVec = this.getViewVector(1.0f);
-        EntityHitResult raytraceresult = null;
-
-        EntityHitResult entityraytraceresult = this.getRayTrace(positionVec, dirVec);
-        if (entityraytraceresult != null)
-        {
-            raytraceresult = entityraytraceresult;
-        }
-
-        if (raytraceresult != null && raytraceresult.getType() == HitResult.Type.ENTITY)
-        {
-            Entity entity = raytraceresult.getEntity();
-            Entity entity1 = this.getShooter();
-            if (entity instanceof Player && entity1 instanceof Player
-            && !((Player) entity1).canHarmPlayer((Player) entity))
-            {
-                raytraceresult = null;
-                entityraytraceresult = null;
-            }
-        }
-
-        if (raytraceresult != null && raytraceresult.getType() == HitResult.Type.ENTITY
-        && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, raytraceresult))
-        {
-            this.onHit(raytraceresult);
-            this.resetAlreadyHits();
-            this.hasImpulse = true;
-        }
-    }
-
-    private void faceEntityStandby()
-    {
-        boolean isRight = getDelay() % 2 == 0;
-        Vec3 pos = new Vec3(0, 0, 0);
+        Vec3 pos = this.getVehicle().position();
+        Vec3 offset = this.getOffset();
 
         if (this.getVehicle() == null)
         {
             doFire();
             return;
         }
-
-        pos = pos.add(this.getVehicle().position()).add(0, this.getVehicle().getEyeHeight() * 0.8, 0);
-
-        double xOffset = random.nextDouble() * 1.5 * (isRight ? 1 : -1);
-        double yOffset = random.nextFloat() * 2;
-        double zOffset = random.nextFloat() * 0.5;
-
-        Vec3 offset = new Vec3(xOffset, yOffset, zOffset);
 
         offset = offset.xRot((float) Math.toRadians(-this.getVehicle().getXRot()));
         offset = offset.yRot((float) Math.toRadians(-this.getVehicle().getYRot()));
