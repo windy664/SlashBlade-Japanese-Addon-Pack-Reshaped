@@ -47,8 +47,66 @@ public class SlashBladeAddonBuiltInRegistry {
     //Frost Wolf
     public static final ResourceKey<SlashBladeDefinition> FROSTY_CHERRY = register("frosty_cherry");
     public static final ResourceKey<SlashBladeDefinition> FROST_WOLF = register("frost_wolf");
+    
+    //Toyako
+    public static final ResourceKey<SlashBladeDefinition> TOYAKO = register("toyako");
+    
+    //Yukari
+    public static final ResourceKey<SlashBladeDefinition> YUKARI = register("yukari");
+    
+    //Laemmle
+    public static final ResourceKey<SlashBladeDefinition> LAEMMLE = register("laemmle");
+    
+    //Tboen
+    public static final ResourceKey<SlashBladeDefinition> TBOEN = register("tboen");
 
     public static void registerAll(BootstapContext<SlashBladeDefinition> bootstrap) {
+    	//Laemmle
+        bootstrap.register(LAEMMLE,
+                new SlashBladeDefinition(SlashBladeAddon.prefix("laemmle"),
+                    RenderDefinition.Builder.newInstance()
+                    .textureName(SlashBladeAddon.prefix("model/laemmle/lem.png"))
+                    .modelName(SlashBladeAddon.prefix("model/laemmle/blade.obj")).build(),
+                     PropertiesDefinition.Builder.newInstance()
+                     .baseAttackModifier(7.0F)
+                     .maxDamage(80).build(), 
+                     List.of(new EnchantmentDefinition(getEnchantmentID(Enchantments.SHARPNESS), 3))));
+    	
+    	//Yukari
+        bootstrap.register(YUKARI,
+                new SlashBladeDefinition(SlashBladeAddon.prefix("yukari"),
+                    RenderDefinition.Builder.newInstance()
+                    .textureName(SlashBladeAddon.prefix("model/yukari/texture.png"))
+                    .modelName(SlashBladeAddon.prefix("model/yukari/model.obj")).build(),
+                     PropertiesDefinition.Builder.newInstance()
+                     .baseAttackModifier(8.0F)
+                     .maxDamage(50)
+                     .slashArtsType(SlashArtsRegistry.DRIVE_HORIZONTAL.getId())
+                     .defaultSwordType(List.of(SwordType.NONE)).build(), List.of()));
+        
+    	//Tboen
+        bootstrap.register(TBOEN,
+             new SlashBladeDefinition(SlashBladeAddon.prefix("tboen"),
+                     RenderDefinition.Builder.newInstance()
+                     .textureName(SlashBladeAddon.prefix("model/tboen/texture.png"))
+                     .modelName(SlashBladeAddon.prefix("model/tboen/model.obj")).build(),
+                     PropertiesDefinition.Builder.newInstance()
+                     .baseAttackModifier(6.0F)
+                     .slashArtsType(SlashArtsRegistry.SAKURA_END.getId())
+                     .maxDamage(70)
+                     .defaultSwordType(List.of(SwordType.NONE)).build(), List.of()));
+    	
+    	//Toyako
+        bootstrap.register(TOYAKO,
+                new SlashBladeDefinition(SlashBladeAddon.prefix("toyako"),
+                     RenderDefinition.Builder.newInstance()
+                     .textureName(SlashBladeAddon.prefix("model/toyako/toyako.png"))
+                     .modelName(SlashBladeAddon.prefix("model/toyako/toyako.obj")).build(),
+                     PropertiesDefinition.Builder.newInstance()
+                     .baseAttackModifier(6.0F)
+                     .maxDamage(70)
+                     .defaultSwordType(List.of(SwordType.NONE)).build(), List.of()));
+    	
         //nihil
         bootstrap.register(NIHIL,
            new SlashBladeDefinition(SlashBladeAddon.prefix("nihil"),
@@ -145,7 +203,7 @@ public class SlashBladeAddonBuiltInRegistry {
            new SlashBladeDefinition(SlashBladeAddon.prefix("tachi"),
                 RenderDefinition.Builder.newInstance()
                 .textureName(SlashBladeAddon.prefix("model/wa/tachi.png"))
-                .modelName(SlashBladeAddon.prefix("model/wa/tachi.obj")).build(),
+                .modelName(SlashBladeAddon.prefix("model/wa/wa.obj")).build(),
                 PropertiesDefinition.Builder.newInstance()
                 .baseAttackModifier(3.0F)
                 .maxDamage(457)
