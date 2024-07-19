@@ -11,17 +11,11 @@ import mods.flammpfeil.slashblade.registry.combo.ComboState;
 import mods.flammpfeil.slashblade.util.AttackManager;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.RegistryBuilder;
 import net.minecraftforge.registries.RegistryObject;
-
-import java.util.function.Supplier;
 
 public class SBAComboStateRegistry
 {
     public static final DeferredRegister<ComboState> COMBO_STATES = DeferredRegister.create(ComboState.REGISTRY_KEY, SlashBladeAddon.MODID);
-
-    public static final Supplier<IForgeRegistry<ComboState>> REGISTRY = COMBO_STATES.makeRegistry(RegistryBuilder::new);
 
     public static final RegistryObject<ComboState> RAPID_BLISTERING_SWORDS = COMBO_STATES.register("rapid_blistering_swords",
        ComboState.Builder.newInstance().startAndEnd(400, 459).priority(50)
