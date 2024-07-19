@@ -148,7 +148,7 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
 
-    implementation fg.deobf("curse.maven:slashblade-resharped-1022428:5454762")
+    implementation fg.deobf("curse.maven:slashblade-resharped-1022428:5507757")
     implementation fg.deobf("curse.maven:tofucraftreload-317469:5350643")
     compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"))
     compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"))
